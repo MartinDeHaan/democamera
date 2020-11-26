@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #000;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.thumb {
+  img {
+    max-width: 80px;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+}
+.thumbs{
+  background-color: rgba(255,255,255, 0.3);
+  flex-wrap: nowrap;
+  overflow: auto;
+
+  overflow-x: auto;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar { 
+    width: 8px;
+    height: 8px;
+    &-track {
+      border-radius: 4px;
+      &-piece  {
+        background: rgba(0,0,0, 0.05);
+      }
+    }
+    &-thumb {
+      background: #673ab7;
+      border-radius: 4px;
+      &:hover {
+        background: #673ab7;
+      }
+    }
+  }
+
+  &[class*="col"] {
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+  }
+}
+
+.webcam-wrapper {
+  display: block !important;
+}
+
+.mirrored {
+  transform: scaleX(-1);
+}
+
+.lb-container {
+  .lb-image {
+    transform: scaleX(-1);
+  }
+}
+.lightboxOverlay {
+  max-height: 100%;
+}

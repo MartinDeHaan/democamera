@@ -1,0 +1,37 @@
+<div class="container position-relative">
+  <div class="row">
+    <div class="col p-0 text-center" #webcamContainer>
+
+      <webcam #webcam class="d-block" [height]="cameraContainerSize.height" [width]="cameraContainerSize.width" [trigger]="triggerObservable"
+        (imageCapture)="handleImage($event)" *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch"
+        [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" [imageQuality]="1"
+        (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)"></webcam>
+
+      <div class="error" *ngIf="errors?.length && errors[0]?.deviceId == deviceId">
+        <h1>{{errors[0].error?.message || (errors[0].error | json)}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row footer w-100">
+    <div class="col">
+      <div class="row thumbs py-2" *ngIf="webcamImages?.length">
+        <div class="col-auto thumb" *ngFor="let webcamImage of webcamImages; let i=index">
+          <img [src]="webcamImage.thumb" (click)="open(webcamImages, i)" [ngClass]="{ 'mirrored': webcamImage.mirrored }" />
+        </div>
+      </div>
+      <div class="row justify-content-center my-3">
+        <div class="col-auto">
+          <button mat-raised-button color="primary" (click)="triggerSnapshot();">Take A Snapshot</button>
+        </div>
+        <div class="col-auto">
+          <button mat-raised-button color="primary" (click)="toggleWebcam();">{{showWebcam ? 'Disable' : 'Enable'}}
+            Webcam</button>
+        </div>
+        <div class="col-auto" *ngIf="multipleWebcamsAvailable && errors?.length && errors[0]?.deviceId == deviceId">
+          <button mat-raised-button color="secondary" (click)="showNextWebcam(true);"
+            [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
